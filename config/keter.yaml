@@ -1,0 +1,5 @@
+exec: ../dist/build/PuzzlePresent/PuzzlePresent
+args:
+    - production
+host: present.greyha.me
+copy-to: greyha.me:/opt/keter/incoming

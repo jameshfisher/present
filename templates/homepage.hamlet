@@ -1,0 +1,24 @@
+<div .content>
+  <div .underlay>
+    <div .hb .hb-3>
+
+  <h1>_{MsgMerryChristmasHelen}
+
+  <div .wrapped>
+    <div .puzzle-box>
+      <div .puzzle>
+        <div .piece .tile-0-0 .pos-1-0>
+        <div .piece .tile-0-1 .pos-0-0>
+        <div .piece .tile-0-2 .pos-0-1>
+        <div .piece .tile-1-0 .pos-1-1>
+        <div .piece .tile-1-1 .pos-1-2>
+        <div .piece .tile-1-2 .pos-2-2>
+        <div .piece .tile-2-0 .pos-2-0>
+        <div .piece .tile-2-1 .pos-2-1>
+    <div .wrapping>
+  
+  <div .overlay>
+    <!-- shamelessly stolen from http://24pullrequests.com/ -->
+    <div .hb .hb-1>
+    <div .hb .hb-2>
+    <div .fallen-snow>

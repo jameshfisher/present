@@ -1,0 +1,59 @@
+$(document).ready(function () {
+  
+  var classNameOf = function(key, el) {
+      return el.className.split(/\s+/).filter(function(s) { return s.indexOf(key) == 0; })[0];
+  };
+
+  var valsOf = function(key) {
+    return function(el) {
+      var vals = classNameOf(key, el).split(/\-/).slice(1)
+        .map( /* eta conversion necessary for some stupid reason */  function(x) { return parseInt(x) });
+      return { x: vals[0], y: vals[1] };
+    }  
+  };
+
+  var posOf = valsOf("pos");
+  var tileOf = valsOf("tile");
+
+  var shiftX = function (by) { return function(pos) { return { x: pos.x + by, y: pos.y}; }; };
+  var shiftY = function (by) { return function(pos) { return { x: pos.x, y: pos.y + by}; }; };
+
+  var inBounds = function (lo, x, hi) { return lo <= x && x <= hi; };
+  var validPos = function (pos) { return inBounds(0, pos.x, 2) && inBounds(0, pos.y, 2); };
+
+  var serializePos = function (pos) { return "pos-" + pos.x + "-" + pos.y; };
+  var elAt = function (pos) { return $("." + serializePos(pos)); };
+
+  var empty = function (pos) { return elAt(pos).size() == 0; };
+
+  var possibleMoves = function (pos) {
+    return [shiftX(-1), shiftX(1), shiftY(-1), shiftY(1)].map(function(f) { return f(pos); }).filter(validPos).filter(empty);
+  };
+
+  /* what tedium */
+  var pointEqual = function(a,b) { return a.x == b.x && a.y == b.y; }
+  var rightPlace = function(el) { return pointEqual(posOf(el), tileOf(el)); };
+  var done = function() { return _.all($(".piece"), rightPlace); };
+
+  var setFinished = function() { if (done()) $("body").addClass("finished"); else $("body").removeClass("finished"); };
+
+  var moveTo = function (pos, el) {
+    $(el).removeClass(classNameOf("pos", el));
+    $(el).addClass(serializePos(pos));
+    setFinished();
+  };
+
+  $(".piece").click(function() {
+    var el = this;
+    var possible = possibleMoves(posOf(el));
+    if (possible.length > 0) moveTo(possible[0], el);
+  });
+
+  setFinished();
+
+  $(".wrapping").click(function() {
+    var el = $(this);
+    el.css("opacity", "0");
+    setTimeout(function() { el.remove(); }, 1000);
+  });
+});
