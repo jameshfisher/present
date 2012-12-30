@@ -2,23 +2,45 @@
   <div .underlay>
     <div .hb .hb-3>
 
-  <h1>_{MsgMerryChristmasHelen}
+  <h1>_{MsgMerryChristmas "Helen"}
 
-  <div .wrapped>
-    <div .puzzle-box>
-      <div .puzzle>
-        <div .piece .tile-0-0 .pos-1-0>
-        <div .piece .tile-0-1 .pos-0-0>
-        <div .piece .tile-0-2 .pos-0-1>
-        <div .piece .tile-1-0 .pos-1-1>
-        <div .piece .tile-1-1 .pos-1-2>
-        <div .piece .tile-1-2 .pos-2-2>
-        <div .piece .tile-2-0 .pos-2-0>
-        <div .piece .tile-2-1 .pos-2-1>
-    <div .wrapping>
-  
+  <div .middle>
+    <div .level>
+      Level #
+      <span .current-level>
+
+    <div .moves>
+      Moves: #
+      <span .current-moves>0
+
+    <div .wrapped>
+      <div .puzzle-box>
+        <div .puzzle>
+          <div .piece .pos-0-0 .tile-0-0>
+          <div .piece .pos-0-1 .tile-0-1>
+          <div .piece .pos-0-2 .tile-0-2>
+
+          <div .piece .pos-1-0 .tile-1-0>
+          <div .piece .pos-1-1 .tile-1-1>
+          <div .piece .pos-1-2 .tile-1-2>
+
+          <div .piece .pos-2-0 .tile-2-0>
+          <div .piece .pos-2-1 .tile-2-1>
+          <!-- <div .piece .pos-2-2 .tile-2-2> -->
+      <div .wrapping>
+
   <div .overlay>
     <!-- shamelessly stolen from http://24pullrequests.com/ -->
     <div .hb .hb-1>
     <div .hb .hb-2>
     <div .fallen-snow>
+
+  <audio #validMoveSound>
+    <source src="/static/audio/validMove.ogg" type="audio/ogg">
+    <source src="/static/audio/validMove.mp3" type="audio/mp3">
+  <audio #invalidMoveSound>
+    <source src="/static/audio/invalidMove.ogg" type="audio/ogg">
+    <source src="/static/audio/invalidMove.mp3" type="audio/mp3">
+  <audio #finishedSound>
+    <source src="/static/audio/finished.ogg" type="audio/ogg">
+    <source src="/static/audio/finished.mp3" type="audio/mp3">

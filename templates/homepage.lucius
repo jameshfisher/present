@@ -1,45 +1,3 @@
-body
-{
-  margin: 0;
-  background-color: rgb(150, 50, 50);
-  -webkit-transition: background-color 1s;
-}
-
-body.finished
-{
-  background-color: rgb(50, 150, 50);
-}
-
-h1
-{
-  font-family: 'Grand Hotel', cursive;
-  color: white;
-  text-shadow:
-    2px 8px 6px rgba(0,0,0,0.2),
-    0px -5px 35px rgba(255,255,255,0.3);
-  font-size: 70px;
-  text-align: center;
-}
-
-div.overlay, div.underlay
-{
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  margin-right: -100%;
-  margin-bottom: -100%;
-  /*box-shadow: inset 0 0 500px rgba(0,50,0,0.3);*/
-}
-
-div.underlay
-{
-  min-height: 100%;
-  background: -webkit-linear-gradient(top, rgba(100, 40, 40, 0), rgba(20, 40, 30, 0.5));
-}
-
 @-webkit-keyframes snow_falling-1
 {
   0%   { background-position:0 0; }
@@ -58,123 +16,207 @@ div.underlay
   100% { background-position:200px 300px; }
 }
 
-div.hb
+
+body
 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  margin: 0;
+
+  background-color: rgb(150, 50, 50);
+  -webkit-transition: background-color 1s;
+
+  font-family: 'Grand Hotel', cursive;
+  color: white;
+
+  h1
+  {
+    text-shadow:
+      2px 8px 6px rgba(0,0,0,0.2),
+      0px -5px 35px rgba(255,255,255,0.3);
+    font-size: 70px;
+    text-align: center;
+  }
+
+  div.overlay, div.underlay
+  {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-right: -100%;
+    margin-bottom: -100%;
+    /*box-shadow: inset 0 0 500px rgba(0,50,0,0.3);*/
+  }
+
+  div.hb
+  {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  div.underlay
+  {
+    min-height: 100%;
+    background: -webkit-linear-gradient(top, rgba(100, 40, 40, 0), rgba(20, 40, 30, 0.5));
+
+    div.hb-3
+    {
+      background-image: url("/static/img/snow/2.png");
+      -webkit-animation: snow_falling-3 30s normal infinite linear;
+      -webkit-opacity: 0.5;
+    }
+  }
+
+  div.overlay
+  {
+    div.hb-1
+    {
+      background-image: url("/static/img/snow/1.png");
+      -webkit-animation: snow_falling-1 15s normal infinite linear;
+    }
+
+    div.hb-2
+    {
+      background-image: url("/static/img/snow/1.png");
+      -webkit-animation: snow_falling-2 20s normal infinite linear;
+    }
+
+    div.fallen-snow
+    {
+      background: url("/static/img/snow/fallen/fallen.png");
+      background-repeat: repeat-x;
+      height: 112px;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+  
+  .middle
+  {
+    width: 370px;
+    margin: 0 auto;
+
+    .puzzle-box
+    {
+      width: 300px;
+      height: 300px;
+      padding: 30px;
+      background: url("/static/img/wood.jpg");
+      box-shadow:
+        inset -2px -2px 0px rgba(0,30,0,0.2),
+        inset  2px  2px 0px rgba(255,200,200,0.3)
+        ;
+      margin: 0 auto;
+
+      .puzzle
+      {
+        width: 300px;
+        height: 300px;
+        padding: 2px;
+        box-shadow:
+          inset  0 0 50px rgba(0,0,0,0.4),
+          inset -2px -2px 1px rgba(255,200,200,0.2),
+          inset  2px  2px 0px rgba(0,30,0,0.4),
+          20px 30px 30px rgba(0,30,0,0.6)
+          ;
+
+        .piece
+        {
+          width: 100px;
+          height: 100px;
+
+          margin-right: -100px;
+          margin-bottom: -100px;
+
+          position: relative;
+
+          background-size: 300px 300px;
+          background-repeat: no-repeat;
+
+          -webkit-transition: left 0.5s, top 0.5s, box-shadow 0.5s;
+          -moz-transition:    left 0.5s, top 0.5s, box-shadow 0.5s;
+          transition:         left 0.5s, top 0.5s, box-shadow 0.5s;
+
+          box-shadow:
+            inset -2px -2px 0px rgba(0,30,0,0.2),
+            inset  2px  2px 0px rgba(255,200,200,0.3)
+            ;
+        }
+
+        .piece.pos-0-0 { left:   0px; top:   0px; }
+        .piece.pos-0-1 { left:   0px; top: 100px; }
+        .piece.pos-0-2 { left:   0px; top: 200px; }
+        .piece.pos-1-0 { left: 100px; top:   0px; }
+        .piece.pos-1-1 { left: 100px; top: 100px; }
+        .piece.pos-1-2 { left: 100px; top: 200px; }
+        .piece.pos-2-0 { left: 200px; top:   0px; }
+        .piece.pos-2-1 { left: 200px; top: 100px; }
+        .piece.pos-2-2 { left: 200px; top: 200px; }
+
+        .piece.tile-0-0 { background-position: -0px -0px; }
+        .piece.tile-0-1 { background-position: -0px -100px; }
+        .piece.tile-0-2 { background-position: -0px -200px; }
+        .piece.tile-1-0 { background-position: -100px -0px; }
+        .piece.tile-1-1 { background-position: -100px -100px; }
+        .piece.tile-1-2 { background-position: -100px -200px; }
+        .piece.tile-2-0 { background-position: -200px -0px; }
+        .piece.tile-2-1 { background-position: -200px -100px; }
+        .piece.tile-2-2 { background-position: -200px -200px; }
+
+        .piece.can-move:hover {
+          z-index: 999;
+          box-shadow:
+            inset -2px -2px 0px rgba(0,30,0,0.2),
+            inset  2px  2px 0px rgba(255,200,200,0.3),
+            0px  0px 20px rgba(255,255,255,0.6)
+            ;
+        }
+      }
+    }
+
+    .wrapping
+    {
+      position: relative;
+      background-image: url("/static/img/wrapping.png"), url("/static/img/wrapping2.JPG");
+      margin: -370px auto 0 auto;
+      width: 370px;
+      height: 370px;
+      box-shadow:
+        inset -2px -2px 0px rgba(0,30,0,0.2),
+        inset  2px  2px 0px rgba(255,200,200,0.3)
+        ;
+      -webkit-transition: opacity 1s;
+    }
+
+    .level {
+      width: 200px;
+      font-size: 40px;
+      float: left;
+      margin-left: -200px;
+
+      text-shadow:
+        2px 8px 6px rgba(0,0,0,0.2),
+        0px -5px 35px rgba(255,255,255,0.3);
+    }
+
+    .moves {
+      width: 200px;
+      font-size: 40px;
+      float: right;
+      margin-right: -200px;
+      text-align: right;
+
+      text-shadow:
+        2px 8px 6px rgba(0,0,0,0.2),
+        0px -5px 35px rgba(255,255,255,0.3);
+    }
+  }
 }
 
-div.overlay div.hb-1
+body.finished
 {
-  background-image: url("/static/img/snow/1.png");
-  -webkit-animation: snow_falling-1 15s normal infinite linear;
+  background-color: rgb(50, 150, 50);
 }
-
-div.overlay div.hb-2
-{
-  background-image: url("/static/img/snow/1.png");
-  -webkit-animation: snow_falling-2 20s normal infinite linear;
-}
-
-div.underlay div.hb-3
-{
-  background-image: url("/static/img/snow/2.png");
-  -webkit-animation: snow_falling-3 30s normal infinite linear;
-  -webkit-opacity: 0.5;
-}
-
-div.overlay div.fallen-snow
-{
-  background: url("/static/img/snow/fallen/fallen.png");
-  background-repeat: repeat-x;
-  height: 112px;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-}
-
-
-.puzzle-box
-{
-  width: 300px;
-  height: 300px;
-  padding: 30px;
-  background: url("/static/img/wood.jpg");
-  box-shadow:
-    inset -2px -2px 0px rgba(0,30,0,0.2),
-    inset  2px  2px 0px rgba(255,200,200,0.3)
-    ;
-  margin: 0 auto;
-}
-
-.wrapping
-{
-  position: relative;
-  background-image: url("/static/img/wrapping.png"), url("/static/img/wrapping2.JPG");
-  margin: -370px auto 0 auto;
-  width: 370px;
-  height: 370px;
-  box-shadow:
-    inset -2px -2px 0px rgba(0,30,0,0.2),
-    inset  2px  2px 0px rgba(255,200,200,0.3)
-    ;
-  -webkit-transition: opacity 1s;
-}
-
-.puzzle
-{
-  width: 300px;
-  height: 300px;
-  padding: 2px;
-  box-shadow:
-    inset  0 0 50px rgba(0,0,0,0.4),
-    inset -2px -2px 1px rgba(255,200,200,0.2),
-    inset  2px  2px 0px rgba(0,30,0,0.4),
-    20px 30px 30px rgba(0,30,0,0.6)
-    ;
-}
-
-.puzzle .piece
-{
-  width: 100px;
-  height: 100px;
-
-  margin-right: -100px;
-  margin-bottom: -100px;
-
-  position: relative;
-
-  background-image: url("/static/img/us.png");
-  background-size: 300px 300px;
-  background-repeat: no-repeat;
-
-  -webkit-transition: left 0.5s, top 0.5s;
-  -moz-transition:    left 0.5s, top 0.5s;
-  transition:         left 0.5s, top 0.5s;
-
-  box-shadow:
-    inset -2px -2px 0px rgba(0,30,0,0.2),
-    inset  2px  2px 0px rgba(255,200,200,0.3)
-    ;
-}
-
-.puzzle .piece.pos-0-0 { left:   0px; top:   0px; }
-.puzzle .piece.pos-0-1 { left:   0px; top: 100px; }
-.puzzle .piece.pos-0-2 { left:   0px; top: 200px; }
-.puzzle .piece.pos-1-0 { left: 100px; top:   0px; }
-.puzzle .piece.pos-1-1 { left: 100px; top: 100px; }
-.puzzle .piece.pos-1-2 { left: 100px; top: 200px; }
-.puzzle .piece.pos-2-0 { left: 200px; top:   0px; }
-.puzzle .piece.pos-2-1 { left: 200px; top: 100px; }
-.puzzle .piece.pos-2-2 { left: 200px; top: 200px; }
-
-.puzzle .piece.tile-0-0 { background-position: -0px -0px; }
-.puzzle .piece.tile-0-1 { background-position: -0px -100px; }
-.puzzle .piece.tile-0-2 { background-position: -0px -200px; }
-.puzzle .piece.tile-1-0 { background-position: -100px -0px; }
-.puzzle .piece.tile-1-1 { background-position: -100px -100px; }
-.puzzle .piece.tile-1-2 { background-position: -100px -200px; }
-.puzzle .piece.tile-2-0 { background-position: -200px -0px; }
-.puzzle .piece.tile-2-1 { background-position: -200px -100px; }
-.puzzle .piece.tile-2-2 { background-position: -200px -200px; }

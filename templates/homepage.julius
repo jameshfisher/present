@@ -1,5 +1,37 @@
 $(document).ready(function () {
-  
+
+  var levels = 
+    [ { shuffle: 1, background: "/static/img/backgrounds/romeo/romeo.jpg" }
+    , { shuffle: 3, background: "/static/img/backgrounds/me/me.jpg" }
+    , { shuffle: 2, background: "/static/img/backgrounds/gandalf/gandalf.jpg" }
+    , { shuffle: 4, background: "/static/img/backgrounds/us/us.png" }
+    ];
+
+  var currentLevel = 0;
+  var numMoves = 0;
+
+  function playValidMoveSound() {
+    console.log("Playing valid move sound.");
+    $("#validMoveSound")[0].cloneNode(true).play();
+  }
+  function playInvalidMoveSound() {
+    console.log("Playing invalid move sound.");
+    $("#invalidMoveSound")[0].cloneNode(true).play();
+  }
+
+  function playFinishedSound(f) {
+    console.log("Playing finished sound.");
+    $("#finishedSound")[0].play();
+    $("#finishedSound").bind("ended", f);
+  }
+
+  function stopFinishedSound() {
+    console.log("Stopping finished sound early!");
+    $("#finishedSound")[0].pause();
+    if ($("#finishedSound")[0].currentTime) $("#finishedSound")[0].currentTime = 0;
+    $("#finishedSound").unbind("ended");
+  }
+
   var classNameOf = function(key, el) {
       return el.className.split(/\s+/).filter(function(s) { return s.indexOf(key) == 0; })[0];
   };
@@ -9,7 +41,7 @@ $(document).ready(function () {
       var vals = classNameOf(key, el).split(/\-/).slice(1)
         .map( /* eta conversion necessary for some stupid reason */  function(x) { return parseInt(x) });
       return { x: vals[0], y: vals[1] };
-    }  
+    }
   };
 
   var posOf = valsOf("pos");
@@ -35,23 +67,93 @@ $(document).ready(function () {
   var rightPlace = function(el) { return pointEqual(posOf(el), tileOf(el)); };
   var done = function() { return _.all($(".piece"), rightPlace); };
 
-  var setFinished = function() { if (done()) $("body").addClass("finished"); else $("body").removeClass("finished"); };
+  var markCanMove = function() {
+    console.log("Marking pieces that can move.");
+    $(".piece").map(function(_, el) {
+      if (possibleMoves(posOf(el)).length > 0) { $(el).addClass("can-move"); }
+      else { $(el).removeClass("can-move"); }
+    });
+  };
+
+  var markCorrect = function() {
+    console.log("Marking correct pieces.");
+    $(".piece").map(function(_, el) {
+      if (rightPlace(el)) { $(el).addClass("correct-position"); }
+      else { $(el).removeClass("correct-position"); }
+    });
+  };
+
+  var markFinished = function() {
+    console.log("Marking whether finished.");
+    if (done()) {
+      $("body").addClass("finished"); 
+      playFinishedSound(function() { startLevel(++currentLevel) });
+    }
+    else {
+      $("body").removeClass("finished");
+      stopFinishedSound();
+    };
+  };
+
+  var update = function() {
+    console.log("Updating UI:");
+    markFinished();
+    markCanMove();
+    markCorrect();
+  };
 
   var moveTo = function (pos, el) {
+    console.log("Moving ", el, " to ", pos, ".");
     $(el).removeClass(classNameOf("pos", el));
     $(el).addClass(serializePos(pos));
-    setFinished();
+  };
+
+  var tryMove = function(el) {
+    console.log("Trying to move ", el, ".");
+    var possible = possibleMoves(posOf(el));
+    if (possible.length > 0) { moveTo(possible[0], el); }
+    return possible.length > 0;
   };
 
   $(".piece").click(function() {
-    var el = this;
-    var possible = possibleMoves(posOf(el));
-    if (possible.length > 0) moveTo(possible[0], el);
+    console.log("Piece clicked.");
+    if (tryMove(this)) {
+      playValidMoveSound();
+      update();
+      $(".current-moves").text(++numMoves);
+    }
+    else {
+      console.log("Invalid move.");
+      playInvalidMoveSound();
+    }
   });
 
-  setFinished();
+  var randFrom = function(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  };
+
+  var shuffle = function(n) {
+    console.log("Shuffling ", n, " pieces.");
+    var pieces = $(".piece");
+    while (n > 0) if (tryMove(randFrom(pieces))) n--;
+  };
+
+  var startLevel = function(n) {
+    console.log("Starting level ", n, ".");
+    n = Math.min(n, levels.length-1);
+    var level = levels[n];
+
+    numMoves = 0;
+
+    $(".current-level").text(n+1);
+    shuffle(level.shuffle);
+    $(".piece").css("background-image", "url(" + level.background + ")");
+  };
+
+  startLevel(0);
 
   $(".wrapping").click(function() {
+    console.log("Unwrapping.");
     var el = $(this);
     el.css("opacity", "0");
     setTimeout(function() { el.remove(); }, 1000);
