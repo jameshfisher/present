@@ -60,7 +60,6 @@ body
 
     div.hb-3
     {
-      background-image: url("/static/img/snow/2.png");
       -webkit-animation: snow_falling-3 30s normal infinite linear;
       -webkit-opacity: 0.5;
     }
@@ -70,13 +69,11 @@ body
   {
     div.hb-1
     {
-      background-image: url("/static/img/snow/1.png");
       -webkit-animation: snow_falling-1 15s normal infinite linear;
     }
 
     div.hb-2
     {
-      background-image: url("/static/img/snow/1.png");
       -webkit-animation: snow_falling-2 20s normal infinite linear;
     }
 

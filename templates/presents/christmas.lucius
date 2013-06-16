@@ -2,4 +2,20 @@ body
 {
   background-color: rgb(150, 50, 50);
   font-family: 'Grand Hotel', cursive;
+
+  div.underlay
+  {
+    div.hb-3
+    {
+      background-image: url("/static/img/snow/2.png");
+    }
+  }
+
+  div.overlay
+  {
+    div.hb-1, div.hb-2
+    {
+      background-image: url("/static/img/snow/1.png");
+    }
+  }
 }
