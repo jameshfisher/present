@@ -4,3 +4,4 @@
 /robots.txt RobotsR GET
 
 /christmas ChristmasR GET
+/birthday  BirthdayR  GET
