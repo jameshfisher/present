@@ -35,12 +35,15 @@
     <div .hb .hb-2>
     <div .fallen-snow>
 
+  <audio #backgroundSound autoplay="autoplay" loop="loop" preload="auto">
+    <source src="/static/audio/#{theme}/background.ogg" type="audio/ogg">
+    <source src="/static/audio/#{theme}/background.mp3" type="audio/mp3">
   <audio #validMoveSound>
-    <source src="/static/audio/validMove.ogg" type="audio/ogg">
-    <source src="/static/audio/validMove.mp3" type="audio/mp3">
+    <source src="/static/audio/#{theme}/validMove.ogg" type="audio/ogg">
+    <source src="/static/audio/#{theme}/validMove.mp3" type="audio/mp3">
   <audio #invalidMoveSound>
-    <source src="/static/audio/invalidMove.ogg" type="audio/ogg">
-    <source src="/static/audio/invalidMove.mp3" type="audio/mp3">
+    <source src="/static/audio/#{theme}/invalidMove.ogg" type="audio/ogg">
+    <source src="/static/audio/#{theme}/invalidMove.mp3" type="audio/mp3">
   <audio #finishedSound>
-    <source src="/static/audio/finished.ogg" type="audio/ogg">
-    <source src="/static/audio/finished.mp3" type="audio/mp3">
+    <source src="/static/audio/#{theme}/finished.ogg" type="audio/ogg">
+    <source src="/static/audio/#{theme}/finished.mp3" type="audio/mp3">

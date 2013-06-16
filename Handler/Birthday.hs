@@ -10,4 +10,4 @@ import Handler.Present
 getBirthdayR :: Handler RepHtml
 getBirthdayR = do
   msg <- getMessageRender
-  present (msg $ MsgHappyBirthday "Helen") (toWidget $ $(luciusFile "templates/presents/birthday.lucius"))
+  present "birthday" (msg $ MsgHappyBirthday "Helen") (toWidget $ $(luciusFile "templates/presents/birthday.lucius"))

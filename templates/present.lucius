@@ -20,7 +20,7 @@ body
 {
   margin: 0;
 
-  -webkit-transition: background-color 1s;
+  -webkit-transition: background-gradient 1s;
 
   color: white;
 
@@ -80,7 +80,6 @@ body
     div.fallen-snow
     {
       background-repeat: repeat-x;
-      height: 112px;
       width: 100%;
       position: absolute;
       bottom: 0;

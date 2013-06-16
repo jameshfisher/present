@@ -1,35 +1,45 @@
 $(document).ready(function () {
 
-  var levels = 
-    [ { shuffle: 5, background: "/static/img/backgrounds/romeo/romeo.jpg" }
-    , { shuffle: 10, background: "/static/img/backgrounds/me/me.jpg" }
-    , { shuffle: 15, background: "/static/img/backgrounds/gandalf/gandalf.jpg" }
-    , { shuffle: 20, background: "/static/img/backgrounds/us/us.png" }
+  var levels =
+    [ { shuffle: 1, background: "/static/img/backgrounds/romeo/romeo.jpg" }
+    , { shuffle: 1, background: "/static/img/backgrounds/me/me.jpg" }
+    , { shuffle: 1, background: "/static/img/backgrounds/gandalf/gandalf.jpg" }
+    , { shuffle: 1, background: "/static/img/backgrounds/us/us.png" }
     ];
 
   var currentLevel = 0;
   var numMoves = 0;
 
-  function playValidMoveSound() {
-    console.log("Playing valid move sound.");
-    $("#validMoveSound")[0].cloneNode(true).play();
-  }
-  function playInvalidMoveSound() {
-    console.log("Playing invalid move sound.");
-    $("#invalidMoveSound")[0].cloneNode(true).play();
+  function cloneandPlaySound(jq) {
+    jq[0].cloneNode(true).play();
   }
 
-  function playFinishedSound(f) {
+  function playValidMoveSound() {
+    cloneandPlaySound($("#validMoveSound"));
+  }
+  function playInvalidMoveSound() {
+    cloneandPlaySound($("#invalidMoveSound"));
+  }
+
+  function stopSound(jq) {
+    jq[0].pause();
+    if (jq[0].currentTime) jq[0].currentTime = 0;
+  }
+
+  // finished sound interrupts background sound
+  $("#finishedSound").bind("ended pause", function() { $("#finishedSound")[0].currentTime = 0; $("#backgroundSound")[0].play();  });
+  $("#finishedSound").bind("play",        function() { stopSound($("#backgroundSound")); });
+
+  function playFinishedSound() {
     console.log("Playing finished sound.");
+
     $("#finishedSound")[0].play();
-    $("#finishedSound").bind("ended", f);
   }
 
   function stopFinishedSound() {
-    console.log("Stopping finished sound early!");
-    $("#finishedSound")[0].pause();
-    if ($("#finishedSound")[0].currentTime) $("#finishedSound")[0].currentTime = 0;
-    $("#finishedSound").unbind("ended");
+    console.log("Stopping finished sound.");
+
+    stopSound($("#finishedSound"));
   }
 
   var classNameOf = function(key, el) {
@@ -83,11 +93,13 @@ $(document).ready(function () {
     });
   };
 
+  $("#finishedSound").bind("ended", function() { startLevel(++currentLevel) });
+
   var markFinished = function() {
     console.log("Marking whether finished.");
     if (done()) {
-      $("body").addClass("finished"); 
-      playFinishedSound(function() { startLevel(++currentLevel) });
+      $("body").addClass("finished");
+      playFinishedSound();
     }
     else {
       $("body").removeClass("finished");
@@ -140,6 +152,9 @@ $(document).ready(function () {
 
   var startLevel = function(n) {
     console.log("Starting level ", n, ".");
+
+    $("body").removeClass("finished");
+
     n = Math.min(n, levels.length-1);
     var level = levels[n];
 

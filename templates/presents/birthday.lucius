@@ -3,9 +3,13 @@
   src: url("/static/fonts/harry_p/harry_p.ttf");
 }
 
+html { height: 100%; }
+
 body
 {
-  background-color: hsl(176, 92%, 7%);
+  background-image: -webkit-linear-gradient(top, hsl(176, 92%, 14%) 0%, hsl(232, 92%, 6%) 100%);
+  height: 100%;
+
   font-family: 'Harry P', cursive;
 
   h1
@@ -39,5 +43,5 @@ body
 
 body.finished
 {
-  background-color: hsl(162, 47%, 41%);
+  background-image: -webkit-linear-gradient(top, hsl(162, 47%, 41%) 0%, hsl(140, 92%, 7%) 100%);
 }
