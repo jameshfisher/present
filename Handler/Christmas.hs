@@ -1,6 +1,8 @@
 {-# LANGUAGE TupleSections, OverloadedStrings #-}
 module Handler.Christmas where
 
+import Text.Lucius (luciusFile)
+
 import Import
 
 import Handler.Present
@@ -8,4 +10,4 @@ import Handler.Present
 getChristmasR :: Handler RepHtml
 getChristmasR = do
   msg <- getMessageRender
-  present (msg $ MsgMerryChristmas "Helen") "rgb(150, 50, 50)"
+  present (msg $ MsgMerryChristmas "Helen") (toWidget $ $(luciusFile "templates/presents/christmas.lucius"))

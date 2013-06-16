@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Harry P";
+  src: url("/static/fonts/harry_p/harry_p.ttf");
+}
+
+body
+{
+  background-color: hsl(176, 92%, 7%);
+  font-family: 'Harry P', cursive;
+
+  h1
+  {
+    font-weight: normal;
+  }
+}

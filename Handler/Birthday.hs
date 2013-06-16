@@ -1,6 +1,8 @@
 {-# LANGUAGE TupleSections, OverloadedStrings #-}
 module Handler.Birthday where
 
+import Text.Lucius (luciusFile)
+
 import Import
 
 import Handler.Present
@@ -8,4 +10,4 @@ import Handler.Present
 getBirthdayR :: Handler RepHtml
 getBirthdayR = do
   msg <- getMessageRender
-  present (msg $ MsgHappyBirthday "Helen") "hsl(176, 92%, 7%)"
+  present (msg $ MsgHappyBirthday "Helen") (toWidget $ $(luciusFile "templates/presents/birthday.lucius"))

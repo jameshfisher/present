@@ -16,15 +16,12 @@
   100% { background-position:200px 300px; }
 }
 
-
 body
 {
   margin: 0;
 
-  background-color: #{backgroundColor};
   -webkit-transition: background-color 1s;
 
-  font-family: 'Grand Hotel', cursive;
   color: white;
 
   h1

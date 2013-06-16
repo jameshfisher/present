@@ -5,8 +5,9 @@ import Text.Blaze (toMarkup)
 
 import Import
 
-present :: Text -> Text -> Handler RepHtml
-present title backgroundColor = defaultLayout $ do
+present :: Text -> Widget -> Handler RepHtml
+present title w = defaultLayout $ do
   setTitle $ toMarkup title
   addScriptRemote "/static/js/jaysalvat-buzz-05c96cc/buzz.js"
   $(widgetFile "present")
+  w
