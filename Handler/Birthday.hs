@@ -6,4 +6,6 @@ import Import
 import Handler.Present
 
 getBirthdayR :: Handler RepHtml
-getBirthdayR = present "Happy Birthday!"
+getBirthdayR = do
+  msg <- getMessageRender
+  present $ msg $ MsgHappyBirthday "Helen"

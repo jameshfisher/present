@@ -2,7 +2,7 @@
   <div .underlay>
     <div .hb .hb-3>
 
-  <h1>_{MsgMerryChristmas "Helen"}
+  <h1>#{title}
 
   <div .middle>
     <div .level>
