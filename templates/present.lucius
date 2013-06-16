@@ -79,7 +79,6 @@ body
 
     div.fallen-snow
     {
-      background: url("/static/img/snow/fallen/fallen.png");
       background-repeat: repeat-x;
       height: 112px;
       width: 100%;

@@ -27,6 +27,13 @@ body
     {
       background-image: url("/static/img/stars/1.png");
     }
+
+    div.fallen-snow
+    {
+      background: url("/static/img/stars/hogwarts2.png");
+      height: 300px;
+      opacity: 0.5;
+    }
   }
 }
 

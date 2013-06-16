@@ -17,6 +17,12 @@ body
     {
       background-image: url("/static/img/snow/1.png");
     }
+
+    div.fallen-snow
+    {
+      background: url("/static/img/snow/fallen/fallen.png");
+      height: 112px;
+    }
   }
 }
 
