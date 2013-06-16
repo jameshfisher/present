@@ -8,4 +8,4 @@ import Handler.Present
 getChristmasR :: Handler RepHtml
 getChristmasR = do
   msg <- getMessageRender
-  present $ msg $ MsgMerryChristmas "Helen"
+  present (msg $ MsgMerryChristmas "Helen") "rgb(150, 50, 50)"

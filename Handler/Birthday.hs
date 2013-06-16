@@ -8,4 +8,4 @@ import Handler.Present
 getBirthdayR :: Handler RepHtml
 getBirthdayR = do
   msg <- getMessageRender
-  present $ msg $ MsgHappyBirthday "Helen"
+  present (msg $ MsgHappyBirthday "Helen") "hsl(176, 92%, 7%)"
