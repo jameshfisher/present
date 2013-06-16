@@ -18,6 +18,7 @@ library
                      Settings
                      Settings.StaticFiles
                      Settings.Development
+                     Handler.Present
                      Handler.Christmas
                      Handler.Birthday
 
