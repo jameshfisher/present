@@ -29,3 +29,8 @@ body
     }
   }
 }
+
+body.finished
+{
+  background-color: hsl(162, 47%, 41%);
+}

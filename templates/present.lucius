@@ -209,8 +209,3 @@ body
     }
   }
 }
-
-body.finished
-{
-  background-color: rgb(50, 150, 50);
-}
