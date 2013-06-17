@@ -1,25 +1,25 @@
 $(document).ready(function() {
   $().present(
-    [ { shuffle: 1, background: "/static/img/backgrounds/romeo/romeo.jpg" }
-    , { shuffle: 1, background: "/static/img/backgrounds/me/me.jpg" }
-    , { shuffle: 1, background: "/static/img/backgrounds/gandalf/gandalf.jpg" }
-    , { shuffle: 1, background: "/static/img/backgrounds/us/us.png" }
+    [ { shuffle: 1, background: "@{StaticR img_backgrounds_romeo_romeo_jpg}" }
+    , { shuffle: 1, background: "@{StaticR img_backgrounds_me_me_jpg}" }
+    , { shuffle: 1, background: "@{StaticR img_backgrounds_gandalf_gandalf_jpg}" }
+    , { shuffle: 1, background: "@{StaticR img_backgrounds_us_us_png}" }
     ]
   , { background:
-        [ "/static/audio/christmas/background.ogg"
-        , "/static/audio/christmas/background.mp3"
+        [ @{StaticR audio_christmas_background_ogg}
+        , @{StaticR audio_christmas_background_mp3}
         ]
     , validMove:
-        [ "/static/audio/christmas/validMove.ogg"
-        , "/static/audio/christmas/validMove.mp3"
+        [ @{StaticR audio_christmas_validMove_ogg}
+        , @{StaticR audio_christmas_validMove_mp3}
         ]
     , invalidMove:
-        [ "/static/audio/christmas/invalidMove.ogg"
-        , "/static/audio/christmas/invalidMove.mp3"
+        [ @{StaticR audio_christmas_invalidMove_ogg}
+        , @{StaticR audio_christmas_invalidMove_mp3}
         ]
     , finished:
-        [ "/static/audio/christmas/finished.ogg"
-        , "/static/audio/christmas/finished.mp3"
+        [ @{StaticR audio_christmas_finished_ogg}
+        , @{StaticR audio_christmas_finished_mp3}
         ]
     }
   , function (num) { return num.toString(); });
