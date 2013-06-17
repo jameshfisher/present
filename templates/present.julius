@@ -1,7 +1,16 @@
-$.fn.present = function(levels, sounds, showNumber) {
+$.fn.present = function(levels, soundUrls, showNumber) {
 
   var currentLevel = 0;
   var numMoves = 0;
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  var sounds =
+    { background:  new Howl({ urls: soundUrls.background, autoplay: true, loop: true, buffer: true })
+    , validMove:   new Howl({ urls: soundUrls.validMove })
+    , invalidMove: new Howl({ urls: soundUrls.invalidMove })
+    , finished:    new Howl({ urls: soundUrls.finished })
+    };
 
   function soundIf(cond, sound) {
     if (cond) sound.play();
@@ -12,7 +21,7 @@ $.fn.present = function(levels, sounds, showNumber) {
   sounds.finished.on("end",  function() { sounds.background.play(); });
   sounds.finished.on("play", function() { sounds.background.stop(); });
 
-  ////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////
 
   var classNameOf = function(key, el) {
       return el.className.split(/\s+/).filter(function(s) { return s.indexOf(key) == 0; })[0];

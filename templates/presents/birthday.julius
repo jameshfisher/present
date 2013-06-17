@@ -1,45 +1,28 @@
 $(document).ready(function() {
-  var levels =
+  $().present(
     [ { shuffle: 1, background: "/static/img/backgrounds/romeo/romeo.jpg" }
     , { shuffle: 1, background: "/static/img/backgrounds/me/me.jpg" }
     , { shuffle: 1, background: "/static/img/backgrounds/gandalf/gandalf.jpg" }
     , { shuffle: 1, background: "/static/img/backgrounds/us/us.png" }
-    ];
-
-  var sounds =
-    { background: new Howl(
-        { urls:
-            [ "/static/audio/birthday/background.ogg"
-            , "/static/audio/birthday/background.mp3"
-            ]
-        , autoplay: true
-        , loop: true
-        , buffer: true
-        })
-    , validMove: new Howl(
-        { urls:
-            [ "/static/audio/birthday/validMove.ogg"
-            , "/static/audio/birthday/validMove.mp3"
-            ]
-        })
-    , invalidMove: new Howl(
-        { urls:
-            [ "/static/audio/birthday/invalidMove.ogg"
-            , "/static/audio/birthday/invalidMove.mp3"
-            ]
-        })
-    , finished: new Howl(
-        { urls:
-            [ "/static/audio/birthday/finished.ogg"
-            , "/static/audio/birthday/finished.mp3"
-            ]
-        })
-  };
-
-  $().present(
-    levels,
-    sounds,
-    function (num) {
+    ]
+  , { background:
+        [ "/static/audio/birthday/background.ogg"
+        , "/static/audio/birthday/background.mp3"
+        ]
+    , validMove:
+        [ "/static/audio/birthday/validMove.ogg"
+        , "/static/audio/birthday/validMove.mp3"
+        ]
+    , invalidMove:
+        [ "/static/audio/birthday/invalidMove.ogg"
+        , "/static/audio/birthday/invalidMove.mp3"
+        ]
+    , finished:
+        [ "/static/audio/birthday/finished.ogg"
+        , "/static/audio/birthday/finished.mp3"
+        ]
+    }
+  , function (num) {
       // http://stackoverflow.com/questions/9083037/convert-a-number-into-a-roman-numeral-in-javascript
       if (!+num)
           return false;
