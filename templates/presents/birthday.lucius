@@ -19,6 +19,10 @@ body
 
   div.underlay
   {
+    background-image: url("/static/img/background/sky.png");
+
+    z-index: -1000;
+
     div.hb-3
     {
       background-image: url("/static/img/stars/2.png");
@@ -32,12 +36,12 @@ body
       background-image: url("/static/img/stars/1.png");
     }
 
-    div.fallen-snow
+    /*div.fallen-snow
     {
       background: url("/static/img/stars/hogwarts2.png");
       height: 300px;
       opacity: 0.5;
-    }
+    }*/
   }
 }
 
