@@ -34,16 +34,47 @@
     <div .hb .hb-1>
     <div .hb .hb-2>
     <div .fallen-snow>
+    <div .lightning>
+      <img .lightning-1 src=@{StaticR img_lightning_png}>
 
-  <audio #backgroundSound autoplay="autoplay" loop="loop" preload="auto">
-    <source src="/static/audio/#{theme}/background.ogg" type="audio/ogg">
-    <source src="/static/audio/#{theme}/background.mp3" type="audio/mp3">
-  <audio #validMoveSound>
-    <source src="/static/audio/#{theme}/validMove.ogg" type="audio/ogg">
-    <source src="/static/audio/#{theme}/validMove.mp3" type="audio/mp3">
-  <audio #invalidMoveSound>
-    <source src="/static/audio/#{theme}/invalidMove.ogg" type="audio/ogg">
-    <source src="/static/audio/#{theme}/invalidMove.mp3" type="audio/mp3">
-  <audio #finishedSound>
-    <source src="/static/audio/#{theme}/finished.ogg" type="audio/ogg">
-    <source src="/static/audio/#{theme}/finished.mp3" type="audio/mp3">
+<script type="text/javascript">
+  \$(document).ready(function() {
+    var levels =
+      [ { shuffle: 1, background: "/static/img/backgrounds/romeo/romeo.jpg" }
+      , { shuffle: 1, background: "/static/img/backgrounds/me/me.jpg" }
+      , { shuffle: 1, background: "/static/img/backgrounds/gandalf/gandalf.jpg" }
+      , { shuffle: 1, background: "/static/img/backgrounds/us/us.png" }
+      ];
+
+    var sounds =
+      { background: new Howl(
+          { urls:
+              [ "/static/audio/#{theme}/background.ogg"
+              , "/static/audio/#{theme}/background.mp3"
+              ]
+          , autoplay: true
+          , loop: true
+          , buffer: true
+          })
+      , validMove: new Howl(
+          { urls:
+              [ "/static/audio/#{theme}/validMove.ogg"
+              , "/static/audio/#{theme}/validMove.mp3"
+              ]
+          })
+      , invalidMove: new Howl(
+          { urls:
+              [ "/static/audio/#{theme}/invalidMove.ogg"
+              , "/static/audio/#{theme}/invalidMove.mp3"
+              ]
+          })
+      , finished: new Howl(
+          { urls:
+              [ "/static/audio/#{theme}/finished.ogg"
+              , "/static/audio/#{theme}/finished.mp3"
+              ]
+          })
+    };
+
+    \$().present(levels, sounds);
+  });

@@ -1,46 +1,18 @@
-$(document).ready(function () {
-
-  var levels =
-    [ { shuffle: 1, background: "/static/img/backgrounds/romeo/romeo.jpg" }
-    , { shuffle: 1, background: "/static/img/backgrounds/me/me.jpg" }
-    , { shuffle: 1, background: "/static/img/backgrounds/gandalf/gandalf.jpg" }
-    , { shuffle: 1, background: "/static/img/backgrounds/us/us.png" }
-    ];
+$.fn.present = function(levels, sounds) {
 
   var currentLevel = 0;
   var numMoves = 0;
 
-  function cloneandPlaySound(jq) {
-    jq[0].cloneNode(true).play();
-  }
-
-  function playValidMoveSound() {
-    cloneandPlaySound($("#validMoveSound"));
-  }
-  function playInvalidMoveSound() {
-    cloneandPlaySound($("#invalidMoveSound"));
-  }
-
-  function stopSound(jq) {
-    jq[0].pause();
-    if (jq[0].currentTime) jq[0].currentTime = 0;
+  function soundIf(cond, sound) {
+    if (cond) sound.play();
+    else      sound.stop();
   }
 
   // finished sound interrupts background sound
-  $("#finishedSound").bind("ended pause", function() { $("#finishedSound")[0].currentTime = 0; $("#backgroundSound")[0].play();  });
-  $("#finishedSound").bind("play",        function() { stopSound($("#backgroundSound")); });
+  sounds.finished.on("end",  function() { sounds.background.play(); });
+  sounds.finished.on("play", function() { sounds.background.stop(); });
 
-  function playFinishedSound() {
-    console.log("Playing finished sound.");
-
-    $("#finishedSound")[0].play();
-  }
-
-  function stopFinishedSound() {
-    console.log("Stopping finished sound.");
-
-    stopSound($("#finishedSound"));
-  }
+  ////////////////////////////////////////////////////////////////////////////
 
   var classNameOf = function(key, el) {
       return el.className.split(/\s+/).filter(function(s) { return s.indexOf(key) == 0; })[0];
@@ -77,34 +49,30 @@ $(document).ready(function () {
   var rightPlace = function(el) { return pointEqual(posOf(el), tileOf(el)); };
   var done = function() { return _.all($(".piece"), rightPlace); };
 
+  function classIf(cond, jq, clazz) {
+    if (cond) jq.addClass(clazz);
+    else      jq.removeClass(clazz);
+  }
+
   var markCanMove = function() {
     console.log("Marking pieces that can move.");
     $(".piece").map(function(_, el) {
-      if (possibleMoves(posOf(el)).length > 0) { $(el).addClass("can-move"); }
-      else { $(el).removeClass("can-move"); }
+      classIf(possibleMoves(posOf(el)).length > 0, $(el), "can-move");
     });
   };
 
   var markCorrect = function() {
     console.log("Marking correct pieces.");
     $(".piece").map(function(_, el) {
-      if (rightPlace(el)) { $(el).addClass("correct-position"); }
-      else { $(el).removeClass("correct-position"); }
+      classIf(rightPlace(el), $(el), "correct-position");
     });
   };
 
-  $("#finishedSound").bind("ended", function() { startLevel(++currentLevel) });
-
   var markFinished = function() {
     console.log("Marking whether finished.");
-    if (done()) {
-      $("body").addClass("finished");
-      playFinishedSound();
-    }
-    else {
-      $("body").removeClass("finished");
-      stopFinishedSound();
-    };
+    var d = done();
+    classIf(d, $("body"), "finished");
+    soundIf(d, sounds.finished);
   };
 
   var update = function() {
@@ -127,26 +95,15 @@ $(document).ready(function () {
     return possible.length > 0;
   };
 
-  $(".piece").click(function() {
-    console.log("Piece clicked.");
-    if (tryMove(this)) {
-      playValidMoveSound();
-      update();
-      $(".current-moves").text(++numMoves);
-    }
-    else {
-      console.log("Invalid move.");
-      playInvalidMoveSound();
-    }
-  });
-
-  var randFrom = function(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  };
-
   var shuffle = function(n) {
     console.log("Shuffling ", n, " pieces.");
+
+    var randFrom = function(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    };
+
     var pieces = $(".piece");
+
     while (n > 0) if (tryMove(randFrom(pieces))) n--;
   };
 
@@ -165,7 +122,28 @@ $(document).ready(function () {
     $(".piece").css("background-image", "url(" + level.background + ")");
   };
 
-  startLevel(0);
+  function nextLevel() { startLevel(currentLevel++); }
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  $(".piece").click(function() {
+    console.log("Piece clicked.");
+    if (tryMove(this)) {
+
+      sounds.validMove.play();
+
+      $("body").addClass("validMove");
+      setTimeout(function() { $("body").removeClass("validMove"); }, 100);
+
+      update();
+
+      $(".current-moves").text(++numMoves);
+    }
+    else {
+      console.log("Invalid move.");
+      sounds.invalidMove.play();
+    }
+  });
 
   $(".wrapping").click(function() {
     console.log("Unwrapping.");
@@ -173,4 +151,8 @@ $(document).ready(function () {
     el.css("opacity", "0");
     setTimeout(function() { el.remove(); }, 1000);
   });
-});
+
+  sounds.finished.on("end", nextLevel);
+
+  nextLevel();
+};
