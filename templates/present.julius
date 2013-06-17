@@ -1,4 +1,4 @@
-$.fn.present = function(levels, sounds) {
+$.fn.present = function(levels, sounds, showNumber) {
 
   var currentLevel = 0;
   var numMoves = 0;
@@ -117,7 +117,7 @@ $.fn.present = function(levels, sounds) {
 
     numMoves = 0;
 
-    $(".current-level").text(n+1);
+    $(".current-level").text(showNumber(n+1));
     shuffle(level.shuffle);
     $(".piece").css("background-image", "url(" + level.background + ")");
   };
@@ -137,7 +137,7 @@ $.fn.present = function(levels, sounds) {
 
       update();
 
-      $(".current-moves").text(++numMoves);
+      $(".current-moves").text(showNumber(++numMoves));
     }
     else {
       console.log("Invalid move.");
