@@ -1,0 +1,43 @@
+$(document).ready(function() {
+  var levels =
+    [ { shuffle: 1, background: "/static/img/backgrounds/romeo/romeo.jpg" }
+    , { shuffle: 1, background: "/static/img/backgrounds/me/me.jpg" }
+    , { shuffle: 1, background: "/static/img/backgrounds/gandalf/gandalf.jpg" }
+    , { shuffle: 1, background: "/static/img/backgrounds/us/us.png" }
+    ];
+
+  var sounds =
+    { background: new Howl(
+        { urls:
+            [ "/static/audio/christmas/background.ogg"
+            , "/static/audio/christmas/background.mp3"
+            ]
+        , autoplay: true
+        , loop: true
+        , buffer: true
+        })
+    , validMove: new Howl(
+        { urls:
+            [ "/static/audio/christmas/validMove.ogg"
+            , "/static/audio/christmas/validMove.mp3"
+            ]
+        })
+    , invalidMove: new Howl(
+        { urls:
+            [ "/static/audio/christmas/invalidMove.ogg"
+            , "/static/audio/christmas/invalidMove.mp3"
+            ]
+        })
+    , finished: new Howl(
+        { urls:
+            [ "/static/audio/christmas/finished.ogg"
+            , "/static/audio/christmas/finished.mp3"
+            ]
+        })
+  };
+
+  $().present(
+    levels,
+    sounds,
+    function (num) { return num.toString(); });
+});
